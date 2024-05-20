@@ -1,7 +1,7 @@
 package com.example.cocktailserver.security.models;
 
 
-import com.example.server.database.entities.User;
+import com.example.cocktailserver.database.entities.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;

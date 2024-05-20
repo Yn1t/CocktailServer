@@ -1,4 +1,5 @@
 package com.example.cocktailserver.services.impl;
 
-public class CocktailServiceImpl {
+public interface CocktailServiceImpl {
+
 }

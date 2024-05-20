@@ -1,6 +1,6 @@
 package com.example.cocktailserver.security;
 
-import com.example.server.database.repositories.UserRepository;
+import com.example.cocktailserver.database.repositories.UserRepository;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +12,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
 
-import javax.servlet.Filter;
+import javax.servlet.*;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
