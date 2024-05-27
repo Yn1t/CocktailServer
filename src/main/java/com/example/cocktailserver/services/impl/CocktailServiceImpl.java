@@ -45,11 +45,10 @@ public class CocktailServiceImpl implements CocktailService {
         existedCooking.orElseThrow(CookingNotExistException::new);
         existedStyle.orElseThrow(StyleNotExistException::new);
 
-        //Optional<Cocktail> existedName = cocktailRepository.findOptionalByNameAndSubname(request.getName(), request.getSubname());
-        //Optional<Cocktail> existedSub_name = cocktailRepository.findOptionalBySub_name(request.getSub_name());
+        Optional<Cocktail> existedName = cocktailRepository.findOptionalByNameAndSubname(request.getName(), request.getSubname());
 
-        //if (existedName.isPresent())
-            //throw new CocktailAlreadyExistException();
+        if (existedName.isPresent())
+            throw new CocktailAlreadyExistException();
 
         Cocktail cocktail = mapper.map(request, Cocktail.class);
         cocktail.setBase(existedBase.get());

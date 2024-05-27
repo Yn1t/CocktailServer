@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface CocktailRepository extends JpaRepository<Cocktail, String> {
-    //Optional<Cocktail> findOptionalByNameAndSubname(String name, String subname);
+    Optional<Cocktail> findOptionalByNameAndSubname(String name, String subname);
 
     @Override
     Optional<Cocktail> findById(String id);
