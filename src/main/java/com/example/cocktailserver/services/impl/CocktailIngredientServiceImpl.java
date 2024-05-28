@@ -63,12 +63,14 @@ public class CocktailIngredientServiceImpl implements CocktailIngredientService 
         Double sweetness = 0.0;
         Double saltiness = 0.0;
 
+        Double flavour = 0.0;
+
         Optional<Cocktail> existedCocktail = cocktailRepository.findOptionalByNameAndSubname(
                 ingredients.get(0).getCocktailName(),
                 ingredients.get(0).getCocktailSubName());
         map.put("ingredients", new ArrayList<>());
 
-        existedCocktail.orElseThrow(CocktailNotExistsException::new);
+        Cocktail cocktail = existedCocktail.orElseThrow(CocktailNotExistsException::new);
 
         for (CocktailIngredientRequest request : ingredients) {
             Optional<Ingredient> existedIngredient = ingredientRepository.findOptionalByName(request.getIngredientName());
@@ -88,19 +90,28 @@ public class CocktailIngredientServiceImpl implements CocktailIngredientService 
             dto.setQuantity(request.getQuantity());
             map.get("ingredients").add(dto);
 
-            bitterness += ingredient.getBitterness();
-            spiciness += ingredient.getSpiciness();
-            sourness += ingredient.getSaltiness();
-            sweetness += ingredient.getSweetness();
-            saltiness += ingredient.getSaltiness();
+            bitterness += ingredient.getBitterness() * request.getQuantity();
+            spiciness += ingredient.getSpiciness() * request.getQuantity();
+            sourness += ingredient.getSaltiness() * request.getQuantity();
+            sweetness += ingredient.getSweetness() * request.getQuantity();
+            saltiness += ingredient.getSaltiness() * request.getQuantity();
 
-            all_alcohol = request.getQuantity() * ingredient.getStrength();
-            sum_quantity = request.getQuantity();
+            all_alcohol += request.getQuantity() * ingredient.getStrength();
+            sum_quantity += request.getQuantity();
         }
 
-        Double sum = bitterness + spiciness + sourness + sweetness + saltiness;
+        Double flavourSum = bitterness + spiciness + sourness + sweetness + saltiness;
+
+        cocktail.setBitterness(bitterness/flavourSum);
+        cocktail.setSweetness(sweetness/flavourSum);
+        cocktail.setSaltiness(saltiness/flavourSum);
+        cocktail.setSourness(sourness/flavourSum);
+        cocktail.setSpiciness(spiciness/flavourSum);
+
+        cocktail.setStrength(all_alcohol/sum_quantity);
 
         cocktailIngredientRepository.saveAll(newCocktailIngredients);
+
         return map;
     }
 }
