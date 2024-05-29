@@ -24,7 +24,7 @@ public class CocktailUser {
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime addDate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cocktail_user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cocktailUser")
     private List<Rating> ratings;
 
     private String name;

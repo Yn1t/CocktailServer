@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface CocktailUserRepository extends JpaRepository<CocktailUser, String> {
 
     Optional<CocktailUser> findOptionalByEmail(String email);
+    Optional<CocktailUser> findOptionalByName(String name);
 
     @Override
     Optional<CocktailUser> findById(String id);

@@ -2,6 +2,7 @@ package com.example.cocktailserver.services.impl;
 
 
 import com.example.cocktailserver.controllers.exceptions.*;
+import com.example.cocktailserver.controllers.models.CocktailDto;
 import com.example.cocktailserver.controllers.models.CocktailRequest;
 import com.example.cocktailserver.database.entities.*;
 import com.example.cocktailserver.database.repositories.*;
@@ -58,5 +59,13 @@ public class CocktailServiceImpl implements CocktailService {
 
         cocktailRepository.save(cocktail);
         return cocktail.getId();
+    }
+
+    @Override
+    public CocktailDto getCocktail(String id) throws CocktailNotExistsException {
+        Optional<Cocktail> existedCocktail = cocktailRepository.findById(id);
+        Cocktail cocktail = existedCocktail.orElseThrow(CocktailNotExistsException::new);
+
+        return mapper.map(cocktail, CocktailDto.class);
     }
 }

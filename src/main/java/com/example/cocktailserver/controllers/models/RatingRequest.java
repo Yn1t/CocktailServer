@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RatingDto {
-    private String id;
+public class RatingRequest {
+    String user_name;
+    String cocktail_name;
+    String cocktail_subname;
+    int rating;
 }

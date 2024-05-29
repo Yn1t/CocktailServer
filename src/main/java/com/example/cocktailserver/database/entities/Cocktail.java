@@ -60,7 +60,7 @@ public class Cocktail {
 
     private int views;
     private int rating_amount;
-    private float rating;
+    private double rating;
 
     @Override
     public boolean equals(Object o) {

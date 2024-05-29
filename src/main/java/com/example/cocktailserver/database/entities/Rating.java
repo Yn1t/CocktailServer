@@ -27,7 +27,7 @@ public class Rating {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="cocktail_user")
-    private CocktailUser cocktail_user;
+    private CocktailUser cocktailUser;
 
     @Override
     public boolean equals(Object o) {
@@ -35,11 +35,11 @@ public class Rating {
         if (o == null || getClass() != o.getClass()) return false;
         Rating rating = (Rating) o;
         return Objects.equals(id, rating.id) && Objects.equals(cocktail.getId(), rating.cocktail.getId())
-                && Objects.equals(cocktail_user.getId(), rating.cocktail_user.getId());
+                && Objects.equals(cocktailUser.getId(), rating.cocktailUser.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cocktail.getId(), cocktail_user.getId());
+        return Objects.hash(id, cocktail.getId(), cocktailUser.getId());
     }
 }

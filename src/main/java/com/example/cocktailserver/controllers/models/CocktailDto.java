@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class CocktailDto {
     private String id;
     private String name;
-    private String sub_name;
+    private String subname;
     private String picture_link;
 
     private double strength = 0;
